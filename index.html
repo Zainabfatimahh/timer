@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Mimi 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #FFF6EF;
+    --blush: #FFD9E4;
+    --lavender: #F1E3FF;
+    --hotpink: #FF6FA0;
+    --plum: #5B3A4A;
+    --gold: #FFD37E;
+  }
+  *{ box-sizing: border-box; }
+  html,body{
+    margin:0; padding:0; height:100%;
+    font-family:'Quicksand', sans-serif;
+    color: var(--plum);
+    background: linear-gradient(160deg, var(--cream) 0%, var(--blush) 55%, var(--lavender) 100%);
+    overflow-x:hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hearts-field{
+    position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden;
+  }
+  .heart{
+    position:absolute; bottom:-40px; opacity:0.55;
+    animation: floatUp linear infinite;
+    filter: drop-shadow(0 2px 6px rgba(255,111,160,0.25));
+  }
+  @keyframes floatUp{
+    0%{ transform: translateY(0) translateX(0) rotate(0deg); opacity:0; }
+    10%{ opacity:0.6; }
+    90%{ opacity:0.5; }
+    100%{ transform: translateY(-110vh) translateX(var(--drift, 20px)) rotate(20deg); opacity:0; }
+  }
+
+  .wrap{
+    position:relative; z-index:2;
+    min-height:100dvh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding: 32px 20px 48px;
+    text-align:center;
+  }
+
+  .eyebrow{
+    font-family:'Baloo 2', sans-serif;
+    font-size: 14px; letter-spacing:2px; text-transform:uppercase;
+    color: var(--hotpink); font-weight:700; margin-bottom:10px;
+  }
+
+  h1{
+    font-family:'Baloo 2', sans-serif;
+    font-size: clamp(28px, 7vw, 44px);
+    font-weight:800; margin: 0 0 6px;
+    color: var(--plum);
+  }
+  h1 span{ color: var(--hotpink); }
+
+  .sub{
+    font-size: 16px; font-weight:500; color:#7A5568; margin-bottom: 28px;
+    max-width: 320px;
+  }
+
+  /* Mascot heart clock */
+  .mascot-shell{
+    width: 190px; height: 190px; margin-bottom: 26px;
+    position:relative;
+  }
+  .mascot{
+    width:100%; height:100%;
+    animation: bob 3.2s ease-in-out infinite;
+  }
+  @keyframes bob{
+    0%,100%{ transform: translateY(0) rotate(-1deg); }
+    50%{ transform: translateY(-8px) rotate(1deg); }
+  }
+  .blink{ animation: blink 4.5s infinite; transform-origin: center; }
+  @keyframes blink{
+    0%, 92%, 100%{ transform: scaleY(1); }
+    95%{ transform: scaleY(0.1); }
+  }
+
+  .countdown-chip{
+    font-family:'Baloo 2', sans-serif;
+    font-size: 14px; font-weight: 700;
+    background: white; color: var(--hotpink);
+    padding: 8px 18px; border-radius: 999px;
+    box-shadow: 0 6px 16px rgba(255,111,160,0.25);
+    margin-bottom: 22px;
+  }
+
+  .btn{
+    font-family:'Baloo 2', sans-serif;
+    font-size: 17px; font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, var(--hotpink), #FF8FB6);
+    border: none; border-radius: 999px;
+    padding: 16px 30px;
+    cursor:pointer;
+    box-shadow: 0 10px 22px rgba(255,111,160,0.38);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:active{ transform: scale(0.96); }
+  .btn:disabled{
+    background: #E7D3DC; color:#A98A97; box-shadow:none; cursor:default;
+  }
+
+  .status{
+    margin-top: 16px; font-size: 14px; font-weight:600; color:#8A6373;
+    max-width: 300px; line-height:1.5;
+  }
+
+  .footnote{
+    margin-top: 34px; font-size: 12.5px; color:#B18A9A; max-width: 300px; line-height:1.6;
+  }
+
+  /* Full screen surprise overlay */
+  .overlay{
+    position:fixed; inset:0; z-index:50;
+    background: radial-gradient(circle at 50% 30%, rgba(255,215,229,0.98), rgba(241,227,255,0.98));
+    display:none; align-items:center; justify-content:center;
+    flex-direction:column; text-align:center; padding: 24px;
+  }
+  .overlay.show{ display:flex; }
+  .overlay-hearts{ position:absolute; inset:0; overflow:hidden; }
+  .burst-heart{
+    position:absolute; bottom:-10%;
+    animation: burstUp 3.6s ease-in forwards;
+  }
+  @keyframes burstUp{
+    0%{ transform: translateY(0) scale(0.6) rotate(0deg); opacity:0; }
+    15%{ opacity:1; }
+    100%{ transform: translateY(-120vh) scale(1.1) rotate(25deg); opacity:0; }
+  }
+  .big-heart{
+    font-size: 72px; margin-bottom: 6px;
+    animation: pulse 1.1s ease-in-out infinite;
+    filter: drop-shadow(0 8px 18px rgba(255,111,160,0.45));
+    position:relative; z-index:2;
+  }
+  @keyframes pulse{
+    0%,100%{ transform: scale(1); }
+    50%{ transform: scale(1.12); }
+  }
+  .overlay h2{
+    font-family:'Baloo 2', sans-serif;
+    font-size: clamp(32px, 9vw, 56px);
+    color: var(--hotpink);
+    margin: 4px 0 10px;
+    position:relative; z-index:2;
+    text-shadow: 0 4px 14px rgba(255,255,255,0.6);
+  }
+  .overlay p{
+    font-size: 17px; font-weight:600; color:#7A5568; max-width:320px;
+    position:relative; z-index:2; margin-bottom: 26px;
+  }
+  .overlay .btn{ position:relative; z-index:2; }
+</style>
+</head>
+<body>
+
+  <div class="hearts-field" id="ambientHearts"></div>
+
+  <div class="wrap">
+    <div class="eyebrow">a little daily thing</div>
+    <h1>For the cutest mom<br>in the world, <span>mimiiii</span> 💗</h1>
+    <p class="sub">Every night at 9:00pm, this little heart wakes up just to remind you.</p>
+
+    <div class="mascot-shell">
+      <svg class="mascot" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 178 C 40 138, 12 100, 12 65 C 12 32, 38 12, 64 12 C 82 12, 94 22, 100 34 C 106 22, 118 12, 136 12 C 162 12, 188 32, 188 65 C 188 100, 160 138, 100 178 Z"
+          fill="#FF8FB6" stroke="#FF6FA0" stroke-width="4"/>
+        <g class="blink">
+          <ellipse cx="78" cy="80" rx="7" ry="9" fill="#5B3A4A"/>
+          <ellipse cx="122" cy="80" rx="7" ry="9" fill="#5B3A4A"/>
+        </g>
+        <circle cx="65" cy="98" r="9" fill="#FFB6CE" opacity="0.8"/>
+        <circle cx="135" cy="98" r="9" fill="#FFB6CE" opacity="0.8"/>
+        <path d="M85 108 Q100 122 115 108" stroke="#5B3A4A" stroke-width="4" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="countdown-chip" id="countdownChip">counting down to 9:00pm…</div>
+
+    <button class="btn" id="enableBtn">Turn on my 9pm hug 🐻💕</button>
+    <div class="status" id="statusMsg"></div>
+
+    <div class="footnote">
+      Tip from your favorite person: keep this tab open in the background (don't fully close the browser) so your 9pm surprise can find you every night. 🩷
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="overlay-hearts" id="overlayHearts"></div>
+    <div class="big-heart">💗</div>
+    <h2>I love you<br>mimiiii</h2>
+    <p>every single day, but especially right now at 9pm — from your favorite little heart</p>
+    <button class="btn" id="closeOverlay">aww, love you too 🥹</button>
+  </div>
+
+<script>
+  // ---------- Ambient floating hearts ----------
+  const ambientField = document.getElementById('ambientHearts');
+  const heartEmojis = ['💗','💕','💖','💓','💞'];
+
+  function spawnAmbientHeart(){
+    const el = document.createElement('div');
+    el.className = 'heart';
+    el.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+    const size = 14 + Math.random()*18;
+    el.style.fontSize = size + 'px';
+    el.style.left = Math.random()*100 + 'vw';
+    el.style.setProperty('--drift', (Math.random()*80 - 40) + 'px');
+    const duration = 9 + Math.random()*7;
+    el.style.animationDuration = duration + 's';
+    ambientField.appendChild(el);
+    setTimeout(() => el.remove(), duration*1000 + 500);
+  }
+  setInterval(spawnAmbientHeart, 700);
+  for(let i=0;i<8;i++) setTimeout(spawnAmbientHeart, i*350);
+
+  // ---------- Notification permission ----------
+  const enableBtn = document.getElementById('enableBtn');
+  const statusMsg = document.getElementById('statusMsg');
+
+  function refreshButtonState(){
+    if(!('Notification' in window)){
+      enableBtn.disabled = true;
+      statusMsg.textContent = "This browser doesn't support phone notifications, but the on-screen surprise will still work while the page is open. 💕";
+      return;
+    }
+    if(Notification.permission === 'granted'){
+      enableBtn.textContent = "You're all set 💗";
+      enableBtn.disabled = true;
+      statusMsg.textContent = "I'll remind you every night at 9pm, promise. 😌💞";
+    } else if (Notification.permission === 'denied'){
+      enableBtn.disabled = true;
+      statusMsg.textContent = "Notifications are turned off in your browser settings — the on-screen hearts will still pop up at 9pm while this tab is open. 💗";
+    }
+  }
+
+  enableBtn.addEventListener('click', () => {
+    if(!('Notification' in window)) return;
+    Notification.requestPermission().then(() => refreshButtonState());
+  });
+  refreshButtonState();
+
+  // ---------- Pakistan time helper ----------
+  // Always reads the current time in Asia/Karachi (PKT, UTC+5), regardless of
+  // what timezone the device itself is set to.
+  function getKarachiParts(){
+    const fmt = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Asia/Karachi',
+      hour12: false,
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit'
+    });
+    const parts = {};
+    fmt.formatToParts(new Date()).forEach(p => { parts[p.type] = p.value; });
+    return {
+      year: parseInt(parts.year, 10),
+      month: parseInt(parts.month, 10),
+      day: parseInt(parts.day, 10),
+      hour: parseInt(parts.hour, 10) % 24,
+      minute: parseInt(parts.minute, 10),
+      second: parseInt(parts.second, 10)
+    };
+  }
+
+  // ---------- Countdown chip ----------
+  const countdownChip = document.getElementById('countdownChip');
+  function updateCountdown(){
+    const k = getKarachiParts();
+    const secondsNow = k.hour*3600 + k.minute*60 + k.second;
+    const targetSeconds = 21*3600;
+    let diff = targetSeconds - secondsNow;
+    if(diff <= 0) diff += 24*3600;
+    const h = Math.floor(diff/3600);
+    const m = Math.floor((diff%3600)/60);
+    countdownChip.textContent = `${h}h ${m}m until your 9pm surprise (PKT) ⏳`;
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 30000);
+
+  // ---------- The 9pm surprise ----------
+  const overlay = document.getElementById('overlay');
+  const overlayHearts = document.getElementById('overlayHearts');
+  const closeOverlay = document.getElementById('closeOverlay');
+  let lastShownDateKey = null;
+
+  function spawnBurstHeart(){
+    const el = document.createElement('div');
+    el.className = 'burst-heart';
+    el.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+    el.style.fontSize = (18 + Math.random()*22) + 'px';
+    el.style.left = Math.random()*100 + '%';
+    el.style.animationDelay = (Math.random()*1.2) + 's';
+    overlayHearts.appendChild(el);
+    setTimeout(() => el.remove(), 4200);
+  }
+
+  function showSurprise(){
+    overlay.classList.add('show');
+    for(let i=0;i<26;i++) setTimeout(spawnBurstHeart, i*90);
+    if('Notification' in window && Notification.permission === 'granted'){
+      try{
+        new Notification('💗 It\'s 9pm!', { body: 'I love you mimiiii', tag: 'mimi-9pm' });
+      }catch(e){}
+    }
+  }
+
+  closeOverlay.addEventListener('click', () => overlay.classList.remove('show'));
+
+  function checkTime(){
+    const k = getKarachiParts();
+    const todayKey = `${k.year}-${k.month}-${k.day}`;
+    if(k.hour === 21 && k.minute === 0 && lastShownDateKey !== todayKey){
+      lastShownDateKey = todayKey;
+      showSurprise();
+    }
+  }
+  setInterval(checkTime, 1000);
+</script>
+</body>
+</html>
